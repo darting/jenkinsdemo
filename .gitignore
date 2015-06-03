@@ -131,6 +131,7 @@ publish/
 
 # NuGet Packages
 *.nupkg
+!.nuget/NuGet.exe
 # The packages folder can be ignored because of Package Restore
 **/packages/*
 # except build/, which is used as an MSBuild target.
@@ -181,23 +182,4 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-# Custom
-!Slot.Cache
-/Slot.WebApi/Config/connectionStrings.config
-/Slot.WebApi/Config/memcached.config
-/Slot.WebApi/Config/slot.config
-/Slot.BackOffice/Config/connectionStrings.config
-/Slot.BackOffice/Config/memcached.config
-/Slot.BackOffice/Config/slot.config
-/packages
-/_softwares/redis-2.8.17
-/Slot.Configuration/Config/connectionStrings.Debug.config
-/Slot.Configuration/Config/connectionStrings.Release.config
-_softwares/memcached-win32-1.4.4-14/INSTALL
-_softwares/memcached-win32-1.4.4-14/README
-_softwares/memcached-win32-1.4.4-14/memcached-install.bat
-_softwares/memcached-win32-1.4.4-14/memcached-uninstall.bat
-_softwares/memcached-win64-1.4.4-14/memcached-install.bat
-_softwares/memcached-win64-1.4.4-14/memcached-uninstall.bat
-/Slot.WebApi/Config/redis.config
-/Slot.Library.Tests/Config
+
