@@ -1,15 +1,16 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
          DefaultTargets="RunUnitTests">
   <ItemGroup>
-    <BuildArtifactsDir Include="BuildArtifacts\" />
+    <BuildArtifactsDir Include="build\" />
     <SolutionFile Include="jenkinsdemo.sln" />
-    <UnitTestsDLL Include="BuildArtifacts\UnitTestProject1.dll" />
-    <TestResultsPath Include="BuildArtifacts\TestResults.xml" />
+    <UnitTestsDLL Include="build\UnitTestProject1.dll" />
   </ItemGroup>
 
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <BuildPlatform Condition=" '$(BuildPlatform)' == '' ">Any CPU</BuildPlatform>
+	<MsTest>C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\mstest.exe</MsTest>
+    <TestResultsPath>build\TestResults.xml</TestResultsPath>
   </PropertyGroup>
   
   <Target Name="Clean">
@@ -27,6 +28,6 @@
   </Target>
 
   <Target Name="RunUnitTests" DependsOnTargets="Compile">
-    <Exec Command='$(VS90COMNTOOLS)..\IDE\mstest.exe @(UnitTestsDLL) /xml=@(TestResultsPath)' />
+    <Exec Command='"$(MsTest)" /testcontainer:@(UnitTestsDLL) /resultsfile:"$(TestResultsPath)"' />
   </Target>
 </Project>
