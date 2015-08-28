@@ -33,7 +33,7 @@ namespace UnitTestProject1 {
             var students = service.ListAllStudents();
 
             Assert.AreEqual(3, students.Count);
-            Assert.AreEqual("AAA", students[0].LastName);
+            Assert.AreEqual("AAA1", students[0].LastName);
             Assert.AreEqual("BBB", students[1].LastName);
             Assert.AreEqual("ZZZ", students[2].LastName); 
         }

@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EC7893
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1465DE9E-9A58-4DF0-B339-DA54E724ADA0}"
 	ProjectSection(SolutionItems) = preProject
-		build.msbuild = build.msbuild
+		ci.msbuild = ci.msbuild
 	EndProjectSection
 EndProject
 Global
