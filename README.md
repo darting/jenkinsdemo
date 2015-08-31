@@ -7,7 +7,8 @@ http://justinramel.com/2012/09/17/jenkins-dot-net/
 ```
  java -jar jenkins.war
 ```
-ORgi
+OR
+
 running it on tomcat, simply copy jenkins.war to $TOMCAT_HOME/webapps, then access http://yourhost/jenkins.
 refer: https://wiki.jenkins-ci.org/display/JENKINS/Tomcat
 
