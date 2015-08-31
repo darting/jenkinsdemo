@@ -1,3 +1,4 @@
+more informations please visit the following link:
 http://justinramel.com/2012/09/17/jenkins-dot-net/
 
 
@@ -6,7 +7,7 @@ http://justinramel.com/2012/09/17/jenkins-dot-net/
 ```
  java -jar jenkins.war
 ```
-OR
+ORgi
 running it on tomcat, simply copy jenkins.war to $TOMCAT_HOME/webapps, then access http://yourhost/jenkins.
 refer: https://wiki.jenkins-ci.org/display/JENKINS/Tomcat
 
@@ -46,7 +47,7 @@ Code Analysis
 	* msbuild build file (ci.msbuild)
 * post-build
 	* MSTest(or any other unit test plugin)
-		* **/TestResults.xml
+		* Test report TRX file: **/TestResults.xml
 	* email-notification
 	* scan for compiler warnings
 		* Scan console log > Parser > MSBuild
@@ -59,6 +60,7 @@ Code Analysis
 5, security
 * go to http://localhost:8080/configureSecurity/
 * enable security
+* sign up first user 
 
 
 
