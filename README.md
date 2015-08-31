@@ -12,6 +12,8 @@ OR
 running it on tomcat, simply copy jenkins.war to $TOMCAT_HOME/webapps, then access http://yourhost/jenkins.
 refer: https://wiki.jenkins-ci.org/display/JENKINS/Tomcat
 
+setup the environment JENKINS_HOME to <yourpath>\.jenkins
+
 2, access http://localhost:8080/pluginManager/
 
 Required Plugins:
