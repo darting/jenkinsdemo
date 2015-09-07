@@ -1,33 +1,43 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
-         DefaultTargets="RunUnitTests">
+         DefaultTargets="TestAndCodeCoverage">
   <ItemGroup>
     <BuildArtifactsDir Include="build\" />
     <SolutionFile Include="jenkinsdemo.sln" />
-    <UnitTestsDLL Include="build\UnitTestProject1.dll" />
+    <UnitTestsDLL Include="build\NUnitTests.dll" />
+    <OpenCover Include="OpenCover.Console.exe" />
+    <NUnit Include="nunit-console.exe" />
+    <ReportGenerator Include="ReportGenerator.exe" />
+    <CoverageResult Include="build\CodeCoverageReport.xml" />
+    <TestResult Include="build\TestResult.xml" />
+    <CodeCoverageHTML Include="build\coverage" />
   </ItemGroup>
 
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <BuildPlatform Condition=" '$(BuildPlatform)' == '' ">Any CPU</BuildPlatform>
-	  <MsTest>C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\mstest.exe</MsTest>
-    <TestResultsPath>build\TestResults.xml</TestResultsPath>
   </PropertyGroup>
-  
+
   <Target Name="Clean">
     <RemoveDir Directories="@(BuildArtifactsDir)" />
   </Target>
-  
+
   <Target Name="Init" DependsOnTargets="Clean">
-    <MakeDir Directories="@(BuildArtifactsDir)" /> 
+    <MakeDir Directories="@(BuildArtifactsDir)" />
   </Target>
 
   <Target Name="Compile" DependsOnTargets="Init">
     <MSBuild Projects="@(SolutionFile)"
              Targets="Rebuild"
-             Properties="OutDir=%(BuildArtifactsDir.FullPath);Configuration=$(Configuration);Platform=$(BuildPlatform)" />
+             BuildInParallel="true"
+             Properties="OutDir=%(BuildArtifactsDir.FullPath);Configuration=$(Configuration);Platform=$(BuildPlatform);" />
   </Target>
 
-  <Target Name="RunUnitTests" DependsOnTargets="Compile">
-    <Exec Command='"$(MsTest)" /testcontainer:@(UnitTestsDLL) /resultsfile:"$(TestResultsPath)"' />
+  <Target Name="TestAndCodeCoverage" DependsOnTargets="Compile">
+    <Exec ContinueOnError="true"
+          Command='"@(OpenCover)" -returntargetcode -target:"@(NUnit)" -targetargs:"/nologo /noshadow @(UnitTestsDLL) /xml:@(TestResult)" -filter:"+[*]* -[Ihavethetests*]*" -register:administrator -output:"@(CoverageResult)"'>
+      <Output TaskParameter="exitcode" ItemName="exitcodes"/>
+    </Exec>
+    <Exec Command='"@(ReportGenerator)" -reports:"@(CoverageResult)" -targetDir:@(CodeCoverageHTML)' />
+    <Error Text="test failed" Condition="'%(exitcodes.identity)'>0"/>
   </Target>
 </Project>
